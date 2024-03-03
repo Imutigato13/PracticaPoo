@@ -37,12 +37,12 @@ class Sistema:
     def verificarPacienteNA(self,nombre):  
         for p in self.__lista_pacientes:
             if nombre == p.verNombre().split(" ")[0]:
-                return False
+                return True
             elif nombre == p.verNombre().split(" ")[1]:
-                return False
+                return True
             elif nombre == p.verNombre().split:
-                return False
-        return True
+                return True
+        return False
         
     def ingresarPaciente(self,pac):
         self.__lista_pacientes.append(pac)
@@ -56,25 +56,29 @@ class Sistema:
                 return p
     def verDatosPacienteN(self, n):
         __listaN = []
-        if self.verificarPacienteNA(n) == True:
+        if self.verificarPacienteNA(n) == False:
             return None
         for p in self.__lista_pacientes:
             if n == p.verNombre().split(" ")[0]:
                 __listaN.append(p)
         return __listaN
     def verDatosPacienteA(self, a):
+        __listaA = []
         if self.verificarPacienteNA(a) == False:
             return None
         for p in self.__lista_pacientes:
-            if a == p.verCedula():
-                return p
+            if a == p.verNombre().split(" ")[1]:
+                __listaA.append(p)
+        return __listaA
     def verDatosPacienteNA(self, na):
+        __listNA = []
         if self.verificarPacienteNA(na) == False:
             return None
         for p in self.__lista_pacientes:
-            if na == p.verCedula():
-                return p
-            
+            if na == p.verNombre():
+                __listNA.append(p)
+        return __listNA
+        
             
     def verNumeroPacientes(self):
         print("En el sistema hay: " + str(len(self.__lista_pacientes)) + " pacientes") 
@@ -136,8 +140,8 @@ def main():
                 else:
                     print("No existe un paciente con ese nombre")
             elif des == 3:
-                n = input("Ingrese el apellido a buscar, tenga en cuenta que se mostraran todos los pacientes con ese apellido: ")
-                p = sis.verDatosPacienteN(n)
+                a = input("Ingrese el apellido a buscar, tenga en cuenta que se mostraran todos los pacientes con ese apellido: ")
+                p = sis.verDatosPacienteA(a)
                 if p!= None:
                     for i in p:
                         print("Nombre: " + i.verNombre()) 
