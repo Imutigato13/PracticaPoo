@@ -28,38 +28,48 @@ class Sistema:
     def __init__(self):
         self.__lista_pacientes = [] 
         
-    def verificarPaciente(self,cedula=0,nombre=""):    
+    def verificarPacienteC(self,cedula):  
         for p in self.__lista_pacientes:
             if cedula == p.verCedula():
                 return True
-            elif nombre == p.verNombre().split(" ")[0] or p.verNombre().split(" ")[1] or p.verNombre():
-                return True
         return False
+    
+    def verificarPacienteNA(self,nombre):  
+        for p in self.__lista_pacientes:
+            if nombre == p.verNombre().split(" ")[0]:
+                return False
+            elif nombre == p.verNombre().split(" ")[1]:
+                return False
+            elif nombre == p.verNombre().split:
+                return False
+        return True
         
     def ingresarPaciente(self,pac):
         self.__lista_pacientes.append(pac)
         return True
     
     def verDatosPacienteC(self, c):
-        if self.verificarPaciente(c) == False:
+        if self.verificarPacienteC(c) == False:
             return None
         for p in self.__lista_pacientes:
             if c == p.verCedula():
                 return p
     def verDatosPacienteN(self, n):
-        if self.verificarPaciente(n) == False:
+        __listaN = []
+        if self.verificarPacienteNA(n) == True:
             return None
         for p in self.__lista_pacientes:
-            if n == p.verCedula():
-                return p
+            if n == p.verNombre().split(" ")[0]:
+                __listaN.append(p)
+        return __listaN
     def verDatosPacienteA(self, a):
-        if self.verificarPaciente(a) == False:
+        if self.verificarPacienteNA(a) == False:
             return None
         for p in self.__lista_pacientes:
             if a == p.verCedula():
                 return p
     def verDatosPacienteNA(self, na):
-        if self.verificarPaciente(na) == False:
+        if self.verificarPacienteNA(na) == False:
             return None
         for p in self.__lista_pacientes:
             if na == p.verCedula():
@@ -81,7 +91,7 @@ def main():
             print("A continuacion se solicitaran los datos ...") 
             #1. Se solicitan los datos
             cedula = int(input("Ingrese la cedula: ")) 
-            if sis.verificarPaciente(cedula):
+            if sis.verificarPacienteC(cedula):
                 print("\n<< Ya existe un paciente con esa cedula >>".upper()) 
             else:    
                 # 2. se crea un objeto Paciente
@@ -102,19 +112,51 @@ def main():
             des = int(input("""1.Buscar por cedula
                             \r2.Buscar por nombre
                             \r3.Buscar por apellido
-                            \r4.Buscar por nombre y apellido"""))
+                            \r4.Buscar por nombre y apellido
+                            \r:"""))
             if des == 1:
                 c = int(input("Ingrese la cedula a buscar: ")) 
-                p = sis.verDatosPaciente(c) 
+                p = sis.verDatosPacienteC(c) 
                 if p != None:
-                    print("Nombre: " + p.verNombre()) 
+                    print("Nombre: " + p.verNombre())
                     print("Cedula: " + str(p.verCedula())) 
                     print("Genero: " + p.verGenero()) 
                     print("Servicio: " + p.verServicio()) 
                 else:
                     print("No existe un paciente con esa cedula")
             elif des == 2:
-                n = int(input("Ingrese el nombre a buscar, tenga en cuenta que se mostraran todos los pacientes con ese nombre: "))
+                n = input("Ingrese el nombre a buscar, tenga en cuenta que se mostraran todos los pacientes con ese nombre: ")
+                p = sis.verDatosPacienteN(n)
+                if p!= None:
+                    for i in p:
+                        print("Nombre: " + i.verNombre()) 
+                        print("Cedula: " + str(i.verCedula())) 
+                        print("Genero: " + i.verGenero()) 
+                        print("Servicio: " + i.verServicio())
+                else:
+                    print("No existe un paciente con ese nombre")
+            elif des == 3:
+                n = input("Ingrese el apellido a buscar, tenga en cuenta que se mostraran todos los pacientes con ese apellido: ")
+                p = sis.verDatosPacienteN(n)
+                if p!= None:
+                    for i in p:
+                        print("Nombre: " + i.verNombre()) 
+                        print("Cedula: " + str(i.verCedula())) 
+                        print("Genero: " + i.verGenero()) 
+                        print("Servicio: " + i.verServicio())
+                else:
+                    print("No existe un paciente con ese nombre")
+            elif des == 4:
+                n = input("Ingrese el nombre y apellido a buscar, tenga en cuenta que se mostraran todos los pacientes con ese nombre y apellido: ")
+                p = sis.verDatosPacienteN(n)
+                if p!= None:
+                    for i in p:
+                        print("Nombre: " + i.verNombre()) 
+                        print("Cedula: " + str(i.verCedula())) 
+                        print("Genero: " + i.verGenero()) 
+                        print("Servicio: " + i.verServicio())
+                else:
+                    print("No existe un paciente con ese nombre")
         elif opcion !=0:
             continue 
         else:
