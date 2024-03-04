@@ -151,8 +151,8 @@ def main():
                 else:
                     print("No existe un paciente con ese nombre")
             elif des == 4:
-                n = input("Ingrese el nombre y apellido a buscar, tenga en cuenta que se mostraran todos los pacientes con ese nombre y apellido: ")
-                p = sis.verDatosPacienteN(n)
+                na = input("Ingrese el nombre y apellido a buscar, tenga en cuenta que se mostraran todos los pacientes con ese nombre y apellido: ")
+                p = sis.verDatosPacienteNA(na)
                 if p!= None:
                     for i in p:
                         print("Nombre: " + i.verNombre()) 
@@ -160,7 +160,9 @@ def main():
                         print("Genero: " + i.verGenero()) 
                         print("Servicio: " + i.verServicio())
                 else:
-                    print("No existe un paciente con ese nombre")
+                    print("No existe un paciente con ese nombre y apellido")
+            else:
+                print("Elija una opcion valida, volviendo al menu principal")
         elif opcion !=0:
             continue 
         else:

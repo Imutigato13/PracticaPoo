@@ -1,3 +1,5 @@
+import datetime
+
 class Medicamento:
     def __init__(self):
         self.__nombre = "" 
@@ -120,7 +122,10 @@ def main():
                     medicamento = Medicamento()
                     medicamento.asignarNombre(nombre_medicamentos)
                     medicamento.asignarDosis(dosis)
-                    lista_med.append(medicamento)
+                    if sum([x.verNombre == medicamento.verNombre for x in lista_med]) == 0:
+                        lista_med.append(medicamento)
+                    else:
+                        print("Ya hay un medicameto con ese nombre en la lista")
 
                 mas= Mascota()
                 mas.asignarNombre(nombre)
